@@ -1,4 +1,7 @@
-const firebase          = require('firebase')
+import firebase from 'firebase/compat/app';
+import 'firebase/compat/auth';
+import 'firebase/compat/firestore';
+
 const firebaseConfig    = {
     apiKey: "AIzaSyDzyNDfpHJmFxRxAgs4JSB07U6reIFMBZM",
     authDomain: "esg-banking-bolt.firebaseapp.com",
@@ -9,15 +12,6 @@ const firebaseConfig    = {
     measurementId: "G-T2CRLGZ2T8"
   };
 
-  firebase.inititializeApp(firebaseConfig);
-
-
-  const db              = firebase.firestore();
-  const User            = db.collection("Users");
-  const Reward          = db.collection("Rewards");
-  const GreenProfile    = db.collection("GreenProfiles"); //Can remove if Firebase if non-SQL
-  const Voucher         = db.collection("Voucher");
-  const Company         = db.collection("Companies");
-
-
-  module.exports        = User, Reward, GreenProfile, Voucher, Company;
+const firebaseApp = firebase.initializeApp(firebaseConfig);
+const db = firebaseApp.firestore();
+export default db;

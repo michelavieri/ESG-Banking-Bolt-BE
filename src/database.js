@@ -1,7 +1,7 @@
-import { getDatabase, ref } from "firebase/database"
+import firebase from 'firebase/compat/app';
+import 'firebase/compat/auth';
+import 'firebase/compat/firestore';
 
-
-const firebase          = require('firebase')
 const firebaseConfig    = {
     apiKey: "AIzaSyDzyNDfpHJmFxRxAgs4JSB07U6reIFMBZM",
     authDomain: "esg-banking-bolt.firebaseapp.com",
@@ -12,6 +12,6 @@ const firebaseConfig    = {
     measurementId: "G-T2CRLGZ2T8"
   };
 
-firebase.inititializeApp(firebaseConfig);
-const db                = firebase.database();
-module.exports          = db;
+const firebaseApp = firebase.initializeApp(firebaseConfig);
+const db = firebaseApp.firestore();
+export default db;

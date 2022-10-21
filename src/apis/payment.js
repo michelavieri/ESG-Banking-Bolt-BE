@@ -1,18 +1,11 @@
-import { onValue } from "firebase/database"
-
-const express               = require("express");
+import express from 'express';
+import db from "../database.js";
 const app                   = express();
-const db                    = require("../models/database")
 
 // Payment Route
 app.post("/payment/pay", async(req, res) => {
     writePaymentData(req.userID, req.transaction);
     res.send({msg : "Payment has been received"});
-})
-
-// Logout Route
-app.post("/logout", async(req, res) => {
-
 })
 
 function generateUniqueFirestoreId(){
@@ -51,7 +44,7 @@ function calculateGreenToken(amount) {
 
 function addGreenToken(userID, transactionAmount) {
     const reference = ref(db, "/users/" + userID + "/green_profile")
-    onValue(reference, (snapshot) => {
+    db.onValue(reference, (snapshot) => {
         const data          = snapshot.val();
         var currBalance     = data.balance;
         var newBalance      = currBalance + calculateGreenToken(transactionAmount);
@@ -60,4 +53,4 @@ function addGreenToken(userID, transactionAmount) {
     })
 }
 
-module.exports = app;
+export default app;
