@@ -1,10 +1,13 @@
 import express from 'express';
 import db from "../database.js";
+import { ref, onValue, update } from "firebase/database";
+import { Timestamp } from 'firebase/firestore';
 const app                   = express();
 
 // Payment Route
-app.post("/payment/pay", async(req, res) => {
-    writePaymentData(req.userID, req.transaction);
+app.post("/pay", async(req, res) => {
+    const data = req.body;
+    writePaymentData(data.username, data.transaction);
     res.send({msg : "Payment has been received"});
 })
 
@@ -20,10 +23,7 @@ function generateUniqueFirestoreId(){
     return autoId;
   }
 
-function writePaymentData(userID, payment) {
-    // const transactionID = generateUniqueFirestoreId()
-    // const reference = ref(db, "users/" + userID + "/transactions/" + transactionID)
-    db.ref('users/' + userID + '/transactions').push(payment)
+async function writePaymentData(username, payment) {
 
     //If reward is included
     if (payment.rewardUsed == null || payment.rewardUsed == undefined) {
@@ -31,26 +31,38 @@ function writePaymentData(userID, payment) {
     }
 
     //Add code to generate greenToken
-    addGreenToken(userID, payment.amount)
+    const tokenEarned = await addGreenToken(username, payment.amount, payment.donation)
+    payment.timestamp = Timestamp.now();
+    Promise.resolve(tokenEarned).then((value) => payment.tokensEarned += value);
+    await addTransaction(username, payment);
 }
 
-function updateRewardStatus(userID, rewardID){
+async function addTransaction(username, payment) {
+    const userData = await db.collection("Users").doc(username).get();
+    const user = userData.data();
+    
+    user.Transactions.push(payment);
+    await db.collection("Users").doc(username).set(user);
+}
+
+function updateRewardStatus(username, rewardID){
 
 }
 
-function calculateGreenToken(amount) {
-    return 0.10 * amount;
+function calculateGreenToken(amount, donation) {
+    return (0.10 * amount) + donation;
 }
 
-function addGreenToken(userID, transactionAmount) {
-    const reference = ref(db, "/users/" + userID + "/green_profile")
-    db.onValue(reference, (snapshot) => {
-        const data          = snapshot.val();
-        var currBalance     = data.balance;
-        var newBalance      = currBalance + calculateGreenToken(transactionAmount);
+async function addGreenToken(username, transactionAmount, donation) {
+    const userData = await db.collection("Users").doc(username).get();
+    const user = userData.data();
 
-        db.ref(reference + "/balance").set(newBalance);
-    })
+    const tokenEarned = calculateGreenToken(transactionAmount, donation);
+    user.GreenProfile.balance += tokenEarned;
+
+    await db.collection("Users").doc(username).set(user);
+
+    return tokenEarned;
 }
 
 export default app;
