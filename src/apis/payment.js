@@ -9,7 +9,14 @@ app.post("/pay", async(req, res) => {
     const data = req.body;
     writePaymentData(data.username, data.transaction);
     res.send({msg : "Payment has been received"});
-})
+});
+
+app.get("/pay/:companyName", async(req, res) => {
+    const companyName = req.params.companyName;
+    const companyDetails = await getCompanyDetails(companyName);
+
+    res.send(companyDetails);
+});
 
 function generateUniqueFirestoreId(){
     // Alphanumeric characters
@@ -37,20 +44,20 @@ async function writePaymentData(username, payment) {
     await addTransaction(username, payment);
 }
 
-async function addTransaction(username, payment) {
-    const userData = await db.collection("Users").doc(username).get();
-    const user = userData.data();
-    
-    user.Transactions.push(payment);
-    await db.collection("Users").doc(username).set(user);
-}
-
 function updateRewardStatus(username, rewardID){
 
 }
 
 function calculateGreenToken(amount, donation) {
     return (0.10 * amount) + donation;
+}
+
+async function addTransaction(username, payment) {
+    const userData = await db.collection("Users").doc(username).get();
+    const user = userData.data();
+    
+    user.Transactions.push(payment);
+    await db.collection("Users").doc(username).set(user);
 }
 
 async function addGreenToken(username, transactionAmount, donation) {
@@ -63,6 +70,13 @@ async function addGreenToken(username, transactionAmount, donation) {
     await db.collection("Users").doc(username).set(user);
 
     return tokenEarned;
+}
+
+async function getCompanyDetails(companyName) {
+    const companyData = await db.collection("Companies").doc(companyName).get();
+    const company = companyData.data();
+    
+    return company;
 }
 
 export default app;
