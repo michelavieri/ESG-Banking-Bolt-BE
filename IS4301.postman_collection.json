@@ -1,0 +1,569 @@
+{
+	"info": {
+		"_postman_id": "d1795080-18cc-4fc9-b95b-69377fea7662",
+		"name": "IS4301",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Register User",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\" : \"user2\",\r\n\t\"Cards\": [\r\n        {\r\n\t\t    \"cardNo\": 123,\r\n\t\t    \"balance\": 1000.1,\r\n\t\t    \"validUntil\": \"12/25\",\r\n\t\t    \"cardType\": \"Visa\"  \r\n        }\r\n    ],\r\n\t\"GreenProfile\": {\r\n\t\t\"balance\": 1000,\r\n\t\t\"ESG\": 88,\r\n\t\t\"NFTs\":[]\r\n\t},\r\n\t\"Transactions\":[]\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4000/user",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Pay",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\" : \"user1\",\r\n    \"transaction\" : {\r\n        \"id\": \"transaction4\",\r\n\t\t\"timestamp\" : null,\r\n\t\t\"amount\": 30,\r\n        \"donation\" : 1,\r\n\t\t\"vendor\": \"SevenEleven\",\r\n\t\t\"tokensEarned\": 0,\r\n\t\t\"rewardUsed\": null,\r\n\t\t\"cardNumber\": 123\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4000/payment/pay",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"payment",
+						"pay"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Pay",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\" : \"user1\",\r\n    \"transaction\" : {\r\n        \"id\": \"transaction4\",\r\n\t\t\"timestamp\" : null,\r\n\t\t\"amount\": 30,\r\n        \"donation\" : 1,\r\n\t\t\"vendor\": \"SevenEleven\",\r\n\t\t\"tokensEarned\": 0,\r\n\t\t\"rewardUsed\": null,\r\n\t\t\"cardNumber\": 123\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/payment/pay",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"payment",
+								"pay"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "35"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"23-hHt7dEuLn9+1QB6dmDcCavI9Qv0\""
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 27 Oct 2022 13:25:12 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"msg\": \"Payment has been received\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Get Companies for QR",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:4000/payment/pay/sushitei",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"payment",
+						"pay",
+						"sushitei"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Get Companies for QR",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:4000/payment/pay/sushitei",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"payment",
+								"pay",
+								"sushitei"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "141"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"8d-WZbI43W0+ZwqThOeMrFpOV9Xz2k\""
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 27 Oct 2022 14:42:01 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"category\": [\n        \"Food and Beverages\"\n    ],\n    \"name\": \"Sushi Tei\",\n    \"picture\": \"https://sushitei.com/wp-content/uploads/2020/06/Sushi-Tei-Logo-New-300.jpg\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Calculate Token",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"amount\" : 10,\r\n    \"donation\" : 1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4000/payment/calculateToken",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"payment",
+						"calculateToken"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Calculate Token",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"amount\" : 10,\r\n    \"donation\" : 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/payment/calculateToken",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"payment",
+								"calculateToken"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "11"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"b-GdbmbJHFNU9yQoNCv7J8lzGL83Y\""
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 27 Oct 2022 14:23:41 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"token\": 2\n}"
+				}
+			]
+		},
+		{
+			"name": "Retrieve All Rewards",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:4000/rewards/retrieveAll",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"rewards",
+						"retrieveAll"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Retrieve All Rewards",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:4000/rewards/retrieveAll",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"rewards",
+								"retrieveAll"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "624"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"270-vt9i3btktZKTDEduEzm/GGYUUmY\""
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 27 Oct 2022 14:40:36 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"firestoreDoc\": \"9gDxQZB4MBc2gv6BJ4Fg\",\n        \"reward\": {\n            \"vendor\": \"Seven Eleven\",\n            \"details\": \"$5 off for any purchases\",\n            \"purchased\": {\n                \"seconds\": 1666800000,\n                \"nanoseconds\": 189000000\n            },\n            \"amount\": 5,\n            \"validUntil\": {\n                \"seconds\": 1672416000,\n                \"nanoseconds\": 802000000\n            },\n            \"name\": \"Eleven-Eleven Sale\",\n            \"tokensNeeded\": 100,\n            \"id\": \"GPX-SEVEL123456\"\n        }\n    },\n    {\n        \"firestoreDoc\": \"tlcZfSOcKRqDlB7nNmdL\",\n        \"reward\": {\n            \"purchased\": {\n                \"seconds\": 1666800000,\n                \"nanoseconds\": 19000000\n            },\n            \"id\": \"GPX-SUSHITEI12345\",\n            \"name\": \"Halloween Special\",\n            \"vendor\": \"Sushi Tei\",\n            \"details\": \"$20 off for any purchases\",\n            \"amount\": 20,\n            \"tokensNeeded\": 500,\n            \"validUntil\": {\n                \"seconds\": 1672416000,\n                \"nanoseconds\": 411000000\n            }\n        }\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "Exchange Token",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\" : \"user1\",\r\n    \"reward\" : {\r\n        \"firestoreDoc\" : \"tlcZfSOcKRqDlB7nNmdL\",\r\n        \"reward\" : {\r\n            \"validUntil\": {\r\n                \"seconds\": 1672416000,\r\n                \"nanoseconds\": 411000000\r\n            },\r\n            \"purchased\": {\r\n                \"seconds\": 1666800000,\r\n                \"nanoseconds\": 19000000\r\n            },\r\n            \"amount\": 20,\r\n            \"vendor\": \"Sushi Tei\",\r\n            \"name\": \"Halloween Special\",\r\n            \"details\": \"$20 off for any purchases\",\r\n            \"tokensNeeded\": 500,\r\n            \"id\": \"GPX-SUSHITEI12345\"\r\n        }\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4000/rewards/exchange",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"rewards",
+						"exchange"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Exchange Token",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\" : \"user1\",\r\n    \"reward\" : {\r\n        \"firestoreDoc\" : \"tlcZfSOcKRqDlB7nNmdL\",\r\n        \"reward\" : {\r\n            \"validUntil\": {\r\n                \"seconds\": 1672416000,\r\n                \"nanoseconds\": 411000000\r\n            },\r\n            \"purchased\": {\r\n                \"seconds\": 1666800000,\r\n                \"nanoseconds\": 19000000\r\n            },\r\n            \"amount\": 20,\r\n            \"vendor\": \"Sushi Tei\",\r\n            \"name\": \"Halloween Special\",\r\n            \"details\": \"$20 off for any purchases\",\r\n            \"tokensNeeded\": 500,\r\n            \"id\": \"GPX-SUSHITEI12345\"\r\n        }\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/rewards/exchange",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"rewards",
+								"exchange"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "277"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"115-1zVssOo/jETWtHxW2gG45AOwr/k\""
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 27 Oct 2022 14:39:48 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"firestoreDoc\": \"tlcZfSOcKRqDlB7nNmdL\",\n    \"amount\": 20,\n    \"details\": \"$20 off for any purchases\",\n    \"id\": \"GPX-SUSHITEI12345\",\n    \"name\": \"Halloween Special\",\n    \"purchased\": \"2022-10-27T14:39:48.417Z\",\n    \"tokensNeeded\": 500,\n    \"validUntil\": \"2022-12-30T16:00:00.411Z\",\n    \"vendor\": \"Sushi Tei\",\n    \"redeemed\": false\n}"
+				}
+			]
+		},
+		{
+			"name": "Retrieve Single Reward",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:4000/rewards/retrieve/tlcZfSOcKRqDlB7nNmdL",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"rewards",
+						"retrieve",
+						"tlcZfSOcKRqDlB7nNmdL"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Retrieve Single Reward",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:4000/rewards/retrieve/tlcZfSOcKRqDlB7nNmdL",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"rewards",
+								"retrieve",
+								"tlcZfSOcKRqDlB7nNmdL"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "300"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"12c-puTFei02OEVVUa+/F+ZsMiGkBIM\""
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 27 Oct 2022 14:38:30 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": \"tlcZfSOcKRqDlB7nNmdL\",\n    \"reward\": {\n        \"tokensNeeded\": 500,\n        \"name\": \"Halloween Special\",\n        \"id\": \"GPX-SUSHITEI12345\",\n        \"details\": \"$20 off for any purchases\",\n        \"validUntil\": {\n            \"seconds\": 1672416000,\n            \"nanoseconds\": 411000000\n        },\n        \"vendor\": \"Sushi Tei\",\n        \"purchased\": {\n            \"seconds\": 1666800000,\n            \"nanoseconds\": 19000000\n        },\n        \"amount\": 20\n    }\n}"
+				}
+			]
+		}
+	]
+}
