@@ -8,7 +8,7 @@ import { ref,set } from "firebase/database";
 //requiring routes
 // import indexApis from "./src/apis/index";
 import paymentApis from "./src/apis/payment.js";
-// const tokenApis         = require("./apis/token");
+import rewardApis from "./src/apis/rewards.js";
 // const companyApis       = require("./apis/company");
 
 
@@ -30,7 +30,7 @@ app.listen(4000, ()=> console.log("Up & Running 4000"))
 //======================================================================================================================
 // app.use("/", indexApis);
 app.use("/payment", paymentApis);
-// app.use("/rewards", tokenApis);
+app.use("/rewards", rewardApis);
 // app.use("/company", companyApis);
 app.post("/user", async(req, res) => {
     const data = req.body

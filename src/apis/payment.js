@@ -18,6 +18,12 @@ app.get("/pay/:companyName", async(req, res) => {
     res.send(companyDetails);
 });
 
+app.post("/calculateToken", async(req, res) => {
+    const data = req.body;
+    const token = calculateGreenToken(data.amount, data.donation);
+    res.send({token : token});
+});
+
 function generateUniqueFirestoreId(){
     // Alphanumeric characters
     const chars =
