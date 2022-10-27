@@ -1,6 +1,8 @@
 import express, { json } from 'express';
 import cors from 'cors';
 import session from 'express-session';       //To store the user.
+import db from "./src//database.js";
+import { ref,set } from "firebase/database";
 // const passport              = require("passport");              //As a part of the Authentication feature in our web.
 
 //requiring routes
@@ -15,11 +17,11 @@ const app = express()
 
 app.use(json())
 app.use(cors())
-app.use(session({
-    secret: process.env.SESSION_SECRET,
-    resave: false,
-    saveUninitialized: false
-}))
+// app.use(session({
+//     secret: process.env.SESSION_SECRET,
+//     resave: false,
+//     saveUninitialized: false
+// }))
 
 app.listen(4000, ()=> console.log("Up & Running 4000"))
 
@@ -30,3 +32,12 @@ app.listen(4000, ()=> console.log("Up & Running 4000"))
 app.use("/payment", paymentApis);
 // app.use("/rewards", tokenApis);
 // app.use("/company", companyApis);
+app.post("/user", async(req, res) => {
+    const data = req.body
+    const User = db.collection("Users").doc(data.username)
+    // const reference = ref(db, 'user/' + data.username);
+
+    // set(reference, req);
+    await User.set(data);
+    res.send({msg : "User has been added"});
+})
