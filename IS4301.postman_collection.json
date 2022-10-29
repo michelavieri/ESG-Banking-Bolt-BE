@@ -2,7 +2,8 @@
 	"info": {
 		"_postman_id": "d1795080-18cc-4fc9-b95b-69377fea7662",
 		"name": "IS4301",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "15534308"
 	},
 	"item": [
 		{
@@ -564,6 +565,35 @@
 					"body": "{\n    \"id\": \"tlcZfSOcKRqDlB7nNmdL\",\n    \"reward\": {\n        \"tokensNeeded\": 500,\n        \"name\": \"Halloween Special\",\n        \"id\": \"GPX-SUSHITEI12345\",\n        \"details\": \"$20 off for any purchases\",\n        \"validUntil\": {\n            \"seconds\": 1672416000,\n            \"nanoseconds\": 411000000\n        },\n        \"vendor\": \"Sushi Tei\",\n        \"purchased\": {\n            \"seconds\": 1666800000,\n            \"nanoseconds\": 19000000\n        },\n        \"amount\": 20\n    }\n}"
 				}
 			]
+		},
+		{
+			"name": "Redeem Rewards",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\" : \"user1\",\r\n    \"rewardFirestoreDoc\" : \"AKEOsPgxbEdWqWw0swXF\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4000/rewards/redeem",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"rewards",
+						"redeem"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }
