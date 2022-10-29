@@ -3,7 +3,7 @@ import db from "../database.js";
 import { getCountFromServer, Timestamp } from 'firebase/firestore';
 const app                   = express();
 
-// Payment Route
+// Exchange Rewards
 app.post("/exchange", async(req, res) => {
     const data = req.body;
     try {
@@ -15,6 +15,14 @@ app.post("/exchange", async(req, res) => {
     }
 });
 
+// Use (Redeem) owned reward in a transaction
+app.post("/redeem", async(req, res) => {
+    const data = req.body;
+    const returnVal = await redeemRewards(data.username, data.rewardFirestoreDoc);
+    res.send(returnVal);
+});
+
+// Retrieve Single Reward
 app.get("/retrieve/:rewardId", async(req, res) => {
     const rewardId = req.params.rewardId;
     const reward = await retrieveReward(rewardId);
@@ -22,12 +30,14 @@ app.get("/retrieve/:rewardId", async(req, res) => {
     res.send(reward);
 });
 
+// Retrieve All Rewards
 app.get("/retrieveAll", async(req, res) => {
     const rewards = await retrieveAllRewards();
 
     res.send(rewards);
 });
 
+// exchangeReward used to process the incoming request from FE and will act as a mediator that will do all functional calls
 async function exchangeReward(username, reward) {
     const user = await retrieveUser(username);
     const ownedToken = user.GreenProfile.balance;
@@ -45,6 +55,14 @@ async function exchangeReward(username, reward) {
     return convertedReward;
 }
 
+// redeemRewards used to process the incoming request from FE and will act as a mediator that will do all functional calls
+async function redeemRewards(username, rewardId) {
+    const redeemedReward = await useReward(username, rewardId)
+
+    return redeemedReward;
+}
+
+// generateUniqueFirestoreId to generate random UUID
 function generateUniqueFirestoreId(){
     // Alphanumeric characters
     const chars =
@@ -57,6 +75,21 @@ function generateUniqueFirestoreId(){
     return autoId;
 }
 
+// useReward to use (update) user's reward with username and firestoreId as the identifier. This flows is under the assumption that there is only the happy path
+// where the reward has not been redeemed and the deadline hasn't been passed.
+async function useReward(username, firestoreId) {
+    const rewardData = await db.collection("Users").doc(username).collection("Rewards").doc(firestoreId).get();
+    const reward = rewardData.data();
+    reward.redeemed = true;
+
+    const firebaseReward = toFirebaseReward(reward);
+
+    await db.collection("Users").doc(username).collection("Rewards").doc(firestoreId).set(firebaseReward);
+
+    return firebaseReward;
+}
+
+// retrieveAllRewards to retrieve all rewards from the database
 async function retrieveAllRewards() {
     const rewardsData = await db.collection("Rewards").get();
     const rewards = [];
@@ -71,6 +104,7 @@ async function retrieveAllRewards() {
     return rewards;
 }
 
+// retrieveReward to retrieve a reward using the reward id from the database
 async function retrieveReward(rewardId) {
     const rewardData = await db.collection("Rewards").doc(rewardId).get();
     const reward = rewardData.data();
@@ -81,12 +115,14 @@ async function retrieveReward(rewardId) {
     };
 }
 
+// addRewardsToUser updates user's reward collection when they exchanged their tokens
 async function addRewardsToUser(username, rewardID, reward) {
     const RewardCollection = db.collection("Users").doc(username).collection("Rewards").doc(generateUniqueFirestoreId());
 
     await RewardCollection.set(reward);
 }
 
+// retrieveUser to retrieve a user using his/her username as identifier from the database
 async function retrieveUser(username) {
     const userData = await db.collection("Users").doc(username).get();
     const user = userData.data();
@@ -94,6 +130,7 @@ async function retrieveUser(username) {
     return user;
 }
 
+// updateUser to update an user's  details using his/her username as identifier
 async function updateUser(username, user) {
     await db.collection("Users").doc(username).set(user);
 }
@@ -110,6 +147,21 @@ function convertReward(rewardID, reward) {
         validUntil : new Date(reward.validUntil.seconds * 1000 + reward.validUntil.nanoseconds / 1000000),
         vendor : reward.vendor,
         redeemed : false,
+    }
+}
+
+function toFirebaseReward(reward) {
+    return {
+        firestoreDoc : reward.firestoreDoc,
+        amount : reward.amount,
+        details : reward.details,
+        id : reward.id,
+        name : reward.name,
+        purchased : new Date(reward.purchased.seconds * 1000 + reward.purchased.nanoseconds / 1000000),
+        tokensNeeded : reward.tokensNeeded,
+        validUntil : new Date(reward.validUntil.seconds * 1000 + reward.validUntil.nanoseconds / 1000000),
+        vendor : reward.vendor,
+        redeemed : reward.redeemed,
     }
 }
 
