@@ -170,6 +170,7 @@ function convertReward(rewardID, reward) {
         vendor : reward.vendor,
         redeemed : false,
         picture : reward.picture,
+        logo : reward.logo,
     }
 }
 
@@ -186,6 +187,7 @@ function toFirebaseReward(reward) {
         vendor : reward.vendor,
         redeemed : reward.redeemed,
         picture : reward.picture,
+        logo : reward.logo,
     }
 }
 
