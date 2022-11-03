@@ -147,6 +147,7 @@ function convertReward(rewardID, reward) {
         validUntil : new Date(reward.validUntil.seconds * 1000 + reward.validUntil.nanoseconds / 1000000),
         vendor : reward.vendor,
         redeemed : false,
+        picture : reward.picture,
     }
 }
 
@@ -162,6 +163,7 @@ function toFirebaseReward(reward) {
         validUntil : new Date(reward.validUntil.seconds * 1000 + reward.validUntil.nanoseconds / 1000000),
         vendor : reward.vendor,
         redeemed : reward.redeemed,
+        picture : reward.picture,
     }
 }
 

@@ -395,7 +395,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"username\" : \"user1\",\r\n    \"reward\" : {\r\n        \"firestoreDoc\" : \"tlcZfSOcKRqDlB7nNmdL\",\r\n        \"reward\" : {\r\n            \"validUntil\": {\r\n                \"seconds\": 1672416000,\r\n                \"nanoseconds\": 411000000\r\n            },\r\n            \"purchased\": {\r\n                \"seconds\": 1666800000,\r\n                \"nanoseconds\": 19000000\r\n            },\r\n            \"amount\": 20,\r\n            \"vendor\": \"Sushi Tei\",\r\n            \"name\": \"Halloween Special\",\r\n            \"details\": \"$20 off for any purchases\",\r\n            \"tokensNeeded\": 500,\r\n            \"id\": \"GPX-SUSHITEI12345\"\r\n        }\r\n    }\r\n}",
+					"raw": "{\r\n    \"username\" : \"user1\",\r\n    \"reward\" : {\r\n        \"firestoreDoc\" : \"tlcZfSOcKRqDlB7nNmdL\",\r\n        \"reward\": {\r\n            \"id\": \"GPX-SEVEL123456\",\r\n            \"vendor\": \"Seven Eleven\",\r\n            \"details\": \"$5 off for any purchases\",\r\n            \"amount\": 5,\r\n            \"picture\": \"https://www.7-eleven.com.sg/images/bg_711_logo.png\",\r\n            \"tokensNeeded\": 100,\r\n            \"validUntil\": {\r\n                \"seconds\": 1672416000,\r\n                \"nanoseconds\": 802000000\r\n            },\r\n            \"name\": \"Eleven-Eleven Sale\",\r\n            \"purchased\": {\r\n                \"seconds\": 1666800000,\r\n                \"nanoseconds\": 189000000\r\n            }\r\n        }\r\n    }\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -423,7 +423,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"username\" : \"user1\",\r\n    \"reward\" : {\r\n        \"firestoreDoc\" : \"tlcZfSOcKRqDlB7nNmdL\",\r\n        \"reward\" : {\r\n            \"validUntil\": {\r\n                \"seconds\": 1672416000,\r\n                \"nanoseconds\": 411000000\r\n            },\r\n            \"purchased\": {\r\n                \"seconds\": 1666800000,\r\n                \"nanoseconds\": 19000000\r\n            },\r\n            \"amount\": 20,\r\n            \"vendor\": \"Sushi Tei\",\r\n            \"name\": \"Halloween Special\",\r\n            \"details\": \"$20 off for any purchases\",\r\n            \"tokensNeeded\": 500,\r\n            \"id\": \"GPX-SUSHITEI12345\"\r\n        }\r\n    }\r\n}",
+							"raw": "{\r\n    \"username\" : \"user1\",\r\n    \"reward\" : {\r\n        \"firestoreDoc\" : \"tlcZfSOcKRqDlB7nNmdL\",\r\n        \"reward\": {\r\n            \"id\": \"GPX-SEVEL123456\",\r\n            \"vendor\": \"Seven Eleven\",\r\n            \"details\": \"$5 off for any purchases\",\r\n            \"amount\": 5,\r\n            \"picture\": \"https://www.7-eleven.com.sg/images/bg_711_logo.png\",\r\n            \"tokensNeeded\": 100,\r\n            \"validUntil\": {\r\n                \"seconds\": 1672416000,\r\n                \"nanoseconds\": 802000000\r\n            },\r\n            \"name\": \"Eleven-Eleven Sale\",\r\n            \"purchased\": {\r\n                \"seconds\": 1666800000,\r\n                \"nanoseconds\": 189000000\r\n            }\r\n        }\r\n    }\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -461,15 +461,15 @@
 						},
 						{
 							"key": "Content-Length",
-							"value": "277"
+							"value": "340"
 						},
 						{
 							"key": "ETag",
-							"value": "W/\"115-1zVssOo/jETWtHxW2gG45AOwr/k\""
+							"value": "W/\"154-k2ikBqxZ0EMKSRgUI6SUhrKLjog\""
 						},
 						{
 							"key": "Date",
-							"value": "Thu, 27 Oct 2022 14:39:48 GMT"
+							"value": "Thu, 03 Nov 2022 13:45:06 GMT"
 						},
 						{
 							"key": "Connection",
@@ -481,7 +481,7 @@
 						}
 					],
 					"cookie": [],
-					"body": "{\n    \"firestoreDoc\": \"tlcZfSOcKRqDlB7nNmdL\",\n    \"amount\": 20,\n    \"details\": \"$20 off for any purchases\",\n    \"id\": \"GPX-SUSHITEI12345\",\n    \"name\": \"Halloween Special\",\n    \"purchased\": \"2022-10-27T14:39:48.417Z\",\n    \"tokensNeeded\": 500,\n    \"validUntil\": \"2022-12-30T16:00:00.411Z\",\n    \"vendor\": \"Sushi Tei\",\n    \"redeemed\": false\n}"
+					"body": "{\n    \"firestoreDoc\": \"tlcZfSOcKRqDlB7nNmdL\",\n    \"amount\": 5,\n    \"details\": \"$5 off for any purchases\",\n    \"id\": \"GPX-SEVEL123456\",\n    \"name\": \"Eleven-Eleven Sale\",\n    \"purchased\": \"2022-11-03T13:45:06.433Z\",\n    \"tokensNeeded\": 100,\n    \"validUntil\": \"2022-12-30T16:00:00.802Z\",\n    \"vendor\": \"Seven Eleven\",\n    \"redeemed\": false,\n    \"picture\": \"https://www.7-eleven.com.sg/images/bg_711_logo.png\"\n}"
 				}
 			]
 		},
