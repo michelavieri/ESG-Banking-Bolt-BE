@@ -37,6 +37,13 @@ app.get("/retrieveAll", async(req, res) => {
     res.send(rewards);
 });
 
+// Retrieve User's Rewards
+app.get("/retrieveUsers/:username", async(req, res) => {
+    const username = req.params.username;
+    const rewards = await retrieveUserRewards(username);
+
+    res.send(rewards);
+});
 // exchangeReward used to process the incoming request from FE and will act as a mediator that will do all functional calls
 async function exchangeReward(username, reward) {
     const user = await retrieveUser(username);
@@ -92,6 +99,21 @@ async function useReward(username, firestoreId) {
 // retrieveAllRewards to retrieve all rewards from the database
 async function retrieveAllRewards() {
     const rewardsData = await db.collection("Rewards").get();
+    const rewards = [];
+
+    rewardsData.forEach(doc => {
+        rewards.push({
+            firestoreDoc : doc.id,
+            reward : doc.data()
+        });
+    });
+    
+    return rewards;
+}
+
+// retrieveAllRewards to retrieve all rewards from the database
+async function retrieveUserRewards(username) {
+    const rewardsData = await db.collection("Users").doc(username).collection("Rewards").get();
     const rewards = [];
 
     rewardsData.forEach(doc => {
